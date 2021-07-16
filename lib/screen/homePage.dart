@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:notez_app/widget/customAppBar.dart';
 
 import 'package:notez_app/widget/note.dart';
 
@@ -15,14 +16,32 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StaggeredGridView.countBuilder(
-        crossAxisCount: 2,
-        itemCount: 5,
-        itemBuilder: (BuildContext context, int index) => Note(notes[index]),
-        staggeredTileBuilder: (int index) => new StaggeredTile.fit(1),
-        // new StaggeredTile.count(2, index.isEven ? 2 : 1),
-        mainAxisSpacing: 4.0,
-        crossAxisSpacing: 4.0,
+      // backgroundColor: Colors.black,
+      body: SafeArea(
+        child: Column(
+          children: [
+            CustomAppBar(),
+            Container(
+              // -change heights
+              height: 400,
+              child: StaggeredGridView.countBuilder(
+                crossAxisCount: 2,
+                itemCount: 5,
+                itemBuilder: (BuildContext context, int index) =>
+                    Note(notes[index], Colors.orange),
+                staggeredTileBuilder: (int index) => new StaggeredTile.fit(1),
+                // new StaggeredTile.count(2, index.isEven ? 2 : 1),
+                mainAxisSpacing: 4.0,
+                crossAxisSpacing: 4.0,
+              ),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add),
       ),
     );
   }
