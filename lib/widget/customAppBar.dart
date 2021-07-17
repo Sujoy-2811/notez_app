@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:notez_app/screen/newNote.dart';
 
 class CustomAppBar extends StatelessWidget {
+  // final appBarSize;
+  // CustomAppBar(this.appBarSize)
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,7 +24,12 @@ class CustomAppBar extends StatelessWidget {
               ),
             ),
           ),
-          IconButton(onPressed: () {}, icon: Icon(Icons.add_box)),
+          IconButton(
+              onPressed: () {
+                // Navigator.of(context).pop();
+                Navigator.of(context).pushNamed(NewNote.route);
+              },
+              icon: Icon(Icons.add_box)),
         ],
       ),
     );

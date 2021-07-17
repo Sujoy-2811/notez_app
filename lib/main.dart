@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notez_app/provider/notesData.dart';
+import 'package:notez_app/screen/newNote.dart';
 import 'package:provider/provider.dart';
 import './screen/homePage.dart';
 
@@ -19,6 +20,9 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blueGrey,
         ),
         home: MyHomePage(),
+        routes: {
+          NewNote.route: (ctx) => NewNote(),
+        },
       ),
     );
   }
