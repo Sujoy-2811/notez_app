@@ -23,9 +23,9 @@ class MyHomePage extends StatelessWidget {
     );
     final appBarSize = appBar.preferredSize.height;
 
-    final ProductData = Provider.of<NotesData>(context);
-    final notes = ProductData.getData();
-    print(notes);
+    final productData = Provider.of<NotesData>(context);
+    final notes = productData.getData();
+    // print(notes);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: appBar,
