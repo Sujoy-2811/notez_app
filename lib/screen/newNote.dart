@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:notez_app/modal/NotesModal.dart';
+import 'package:notez_app/provider/notesData.dart';
+import 'package:notez_app/widget/options.dart';
+import 'package:provider/provider.dart';
 
 class NewNote extends StatefulWidget {
   static const route = 'NewNoteRoute';
@@ -9,6 +13,24 @@ class NewNote extends StatefulWidget {
 
 class _NewNoteState extends State<NewNote> {
   var selectedColor = Colors.blueGrey;
+  var title = TextEditingController();
+  var description = TextEditingController();
+  Function addNoteData = () {};
+
+  void addNote() {
+    if (title == "" || description == "") {
+      return;
+    }
+    var note = NoteModal(
+        title: title.text, description: description.text, color: selectedColor);
+    addNoteData(note);
+    Navigator.of(context).pop();
+  }
+
+  // NotesData final productData ;
+
+  void crateNote(NoteModal note) {}
+
   void changeColor(MaterialColor color) {
     setState(() {
       selectedColor = color;
@@ -17,45 +39,67 @@ class _NewNoteState extends State<NewNote> {
 
   @override
   Widget build(BuildContext context) {
+    // final routeArgs = ModalRoute.of(context).settings.arguments as <String , Object>;
+    final routeArgs =
+        ModalRoute.of(context)?.settings.arguments as Map<String, Object>;
+    // if (routeArgs != null) {
+    title.text = routeArgs['title'] as String;
+    description.text = routeArgs["description"] as String;
+    selectedColor = routeArgs["color"] as MaterialColor;
+    print(title);
+    // }
+    final productData = Provider.of<NotesData>(context);
+    addNoteData = productData.addNote;
     final appBar = AppBar(
       title: Text("Add Note"),
-      actions: [IconButton(onPressed: () {}, icon: Icon(Icons.save))],
+      actions: [IconButton(onPressed: addNote, icon: Icon(Icons.save))],
     );
     return Scaffold(
         // resizeToAvoidBottomInset: false,
         appBar: appBar,
-        backgroundColor: selectedColor,
+        backgroundColor: Colors.black,
         body: SingleChildScrollView(
-          child: Form(
-              child: Container(
+          child: Container(
             height: (MediaQuery.of(context).size.height -
                     MediaQuery.of(context).padding.top -
                     appBar.preferredSize.height) *
                 0.999,
             child: Column(
               children: [
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: "Title",
-                    //border: InputBorder.none,
-                  ),
-                  style: TextStyle(
-                    // debugLabel: "Title",
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
+                Container(
+                  decoration: BoxDecoration(color: selectedColor),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      labelText: "Title",
+                      //border: InputBorder.none,
+                    ),
+                    style: TextStyle(
+                      // debugLabel: "Title",
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    controller: title,
                   ),
                 ),
-                TextFormField(
-                  maxLines: 10,
-                  decoration: InputDecoration(
-                    alignLabelWithHint: true,
-                    labelText: "Description",
-                    //border: InputBorder.none,
-                  ),
-                  style: TextStyle(
-                    // debugLabel: "Title",
-                    fontSize: 20,
-                    // fontWeight: FontWeight.w600,
+                Container(
+                  height: 2,
+                  decoration: BoxDecoration(color: Colors.black),
+                ),
+                Container(
+                  decoration: BoxDecoration(color: selectedColor),
+                  child: TextField(
+                    maxLines: 10,
+                    decoration: InputDecoration(
+                      alignLabelWithHint: true,
+                      labelText: "Description",
+                      //border: InputBorder.none,
+                    ),
+                    style: TextStyle(
+                      // debugLabel: "Title",
+                      fontSize: 20,
+                      // fontWeight: FontWeight.w600,
+                    ),
+                    controller: description,
                   ),
                 ),
                 Flexible(
@@ -64,155 +108,11 @@ class _NewNoteState extends State<NewNote> {
                       padding: EdgeInsets.all(10),
                       height: double.infinity,
                       decoration: BoxDecoration(color: Colors.black),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  changeColor(Colors.green);
-                                },
-                                child: Container(
-                                  height: 40,
-                                  width: 40,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.green),
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  changeColor(Colors.blueGrey);
-                                },
-                                child: Container(
-                                  height: 40,
-                                  width: 40,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.blueGrey),
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  changeColor(Colors.blue);
-                                },
-                                child: Container(
-                                  height: 40,
-                                  width: 40,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.blue),
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  changeColor(Colors.orange);
-                                },
-                                child: Container(
-                                  height: 40,
-                                  width: 40,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.orange),
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  changeColor(Colors.red);
-                                },
-                                child: Container(
-                                  height: 40,
-                                  width: 40,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.red),
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  changeColor(Colors.pink);
-                                },
-                                child: Container(
-                                  height: 40,
-                                  width: 40,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.pink),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            children: [
-                              IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.share,
-                                    color: Colors.white,
-                                  )),
-                              Text(
-                                "Share",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 18),
-                              )
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.copy,
-                                    color: Colors.white,
-                                  )),
-                              Text(
-                                "Copy to clipboard",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 18),
-                              )
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.control_point_duplicate_outlined,
-                                    color: Colors.white,
-                                  )),
-                              Text(
-                                "Dupicate Note",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 18),
-                              )
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.delete,
-                                    color: Colors.white,
-                                  )),
-                              Text(
-                                "Delete Note",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 18),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ))
+                      child: Options(changeColor),
+                    )),
               ],
             ),
-          )),
+          ),
         ));
   }
 }

@@ -50,7 +50,7 @@ class MyHomePage extends StatelessWidget {
                 crossAxisCount: 2,
                 itemCount: notes.length,
                 itemBuilder: (BuildContext context, int index) =>
-                    Note(notes[index], Colors.orange),
+                    Note(notes[index]),
                 staggeredTileBuilder: (int index) => new StaggeredTile.fit(1),
                 // new StaggeredTile.count(2, index.isEven ? 2 : 1),
                 mainAxisSpacing: 4.0,
@@ -63,7 +63,11 @@ class MyHomePage extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushNamed(NewNote.route);
+          Navigator.of(context).pushNamed(NewNote.route, arguments: {
+            "title": "",
+            "description": "",
+            "color": Colors.blueGrey
+          });
         },
         child: Icon(Icons.add),
       ),

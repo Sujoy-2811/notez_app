@@ -28,7 +28,11 @@ class CustomAppBar extends StatelessWidget {
               onPressed: () {
                 // Navigator.of(context).pop();
                 FocusScope.of(context).requestFocus(FocusNode());
-                Navigator.of(context).pushNamed(NewNote.route);
+                Navigator.of(context).pushNamed(NewNote.route, arguments: {
+                  "title": "",
+                  "description": "",
+                  "color": Colors.blueGrey
+                });
               },
               icon: Icon(Icons.add_box)),
         ],

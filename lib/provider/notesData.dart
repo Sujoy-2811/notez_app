@@ -1,29 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:notez_app/modal/NotesModal.dart';
 
 class NotesData with ChangeNotifier {
-  static const _notes = [
-    'sfsefjsliedfjl ljlkj kkljlkjkljk',
-    'sfsefjsliedfjl ljlkj kkljlkjkljk  jhgjh kjh hkuhkjhjb jg',
-    'sfsefjsliedfjl ljlkj kkljlkjkljj kkljlj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjk jgujhkjh khh ',
-    'sfsefjsliedfjl ljlkj kkljlkjkljk gjgkjhkjhj',
-    'sfsefjsliedfjl ljlkj kkljlkjkljk gjgkjhkjhj',
-    'sfsefjsliedfjl ljlkj kkljlkjkljj kkljlj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjk jgujhkjh khh ',
-    'sfsefjsliedfjl ljlkj kkljlkjkljk gjgkjhkjhj',
-    'sfsefjsliedfjl ljlkj kkljlkjkljk gjgkjhkjhj',
-    'sfsefjsliedfjl ljlkj kkljlkjkljj kkljlj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjk jgujhkjh khh ',
-    'sfsefjsliedfjl ljlkj kkljlkjkljk gjgkjhkjhj',
-    'sfsefjsliedfjl ljlkj kkljlkjkljk gjgkjhkjhj',
-    'sfsefjsliedfjl ljlkj kkljlkjkljj kkljlj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjk jgujhkjh khh ',
-    'sfsefjsliedfjl ljlkj kkljlkjkljk gjgkjhkjhj',
-    'sfsefjsliedfjl ljlkj kkljlkjkljk gjgkjhkjhj',
-    'sfsefjsliedfjl ljlkj kkljlkjkljk gjgkjhkjhj',
-    'sfsefjsliedfjl ljlkj kkljlkjkljk gjgkjhkjhj',
-    'sfsefjsliedfjl ljlkj kkljlkjkljk gjgkjhkjhj',
-    'hi',
-    'hi'
+  var _notes = [
+    NoteModal(
+        title: "hello", description: "fgdfgbdfxbgfxcbgf", color: Colors.amber),
+    NoteModal(
+        title: "hello", description: "fgdfgbdfxbgfxcbgf", color: Colors.amber),
+    NoteModal(
+        title: "hello", description: "fgdfgbdfxbgfxcbgf", color: Colors.amber),
+    NoteModal(
+        title: "hello", description: "fgdfgbdfxbgfxcbgf", color: Colors.amber),
+    NoteModal(
+        title: "hello", description: "fgdfgbdfxbgfxcbgf", color: Colors.amber),
+    NoteModal(
+        title: "hello", description: "fgdfgbdfxbgfxcbgf", color: Colors.amber),
+    NoteModal(
+        title: "Hi", description: "fgdfgbdfxbgfxcbgf", color: Colors.amber),
   ];
 
-  List<String> getData() {
+  List<NoteModal> getData() {
     return _notes;
+  }
+
+  void addNote(NoteModal nodemodal) {
+    _notes.insert(0, nodemodal);
+    notifyListeners();
   }
 }
