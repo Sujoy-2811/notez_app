@@ -50,7 +50,7 @@ class MyHomePage extends StatelessWidget {
                 crossAxisCount: 2,
                 itemCount: notes.length,
                 itemBuilder: (BuildContext context, int index) =>
-                    Note(notes[index]),
+                    Note(notes[index], index),
                 staggeredTileBuilder: (int index) => new StaggeredTile.fit(1),
                 // new StaggeredTile.count(2, index.isEven ? 2 : 1),
                 mainAxisSpacing: 4.0,
@@ -66,7 +66,8 @@ class MyHomePage extends StatelessWidget {
           Navigator.of(context).pushNamed(NewNote.route, arguments: {
             "title": "",
             "description": "",
-            "color": Colors.blueGrey
+            "color": Colors.blueGrey,
+            "index": -1
           });
         },
         child: Icon(Icons.add),

@@ -12,18 +12,20 @@ class NewNote extends StatefulWidget {
 }
 
 class _NewNoteState extends State<NewNote> {
+  var firstTime = true;
   var selectedColor = Colors.blueGrey;
   var title = TextEditingController();
   var description = TextEditingController();
+  var index = -1;
   Function addNoteData = () {};
 
   void addNote() {
-    if (title == "" || description == "") {
+    if (title.text == "" || description.text == "") {
       return;
     }
     var note = NoteModal(
         title: title.text, description: description.text, color: selectedColor);
-    addNoteData(note);
+    addNoteData(note, index);
     Navigator.of(context).pop();
   }
 
@@ -40,15 +42,19 @@ class _NewNoteState extends State<NewNote> {
   @override
   Widget build(BuildContext context) {
     // final routeArgs = ModalRoute.of(context).settings.arguments as <String , Object>;
-    final routeArgs =
-        ModalRoute.of(context)?.settings.arguments as Map<String, Object>;
-    // if (routeArgs != null) {
-    title.text = routeArgs['title'] as String;
-    description.text = routeArgs["description"] as String;
-    selectedColor = routeArgs["color"] as MaterialColor;
-    print(title);
+    if (firstTime) {
+      final routeArgs =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+      // // if (routeArgs != null) {
+      title.text = routeArgs['title'] as String;
+      description.text = routeArgs["description"] as String;
+      MaterialColor currentcolor = routeArgs["color"] as MaterialColor;
+      selectedColor = currentcolor;
+      index = routeArgs["index"] as int;
+      firstTime = false;
+    }
     // }
-    final productData = Provider.of<NotesData>(context);
+    final productData = Provider.of<NotesData>(context, listen: false);
     addNoteData = productData.addNote;
     final appBar = AppBar(
       title: Text("Add Note"),

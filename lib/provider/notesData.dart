@@ -4,7 +4,7 @@ import 'package:notez_app/modal/NotesModal.dart';
 class NotesData with ChangeNotifier {
   var _notes = [
     NoteModal(
-        title: "hello", description: "fgdfgbdfxbgfxcbgf", color: Colors.amber),
+        title: "hello1", description: "fgdfgbdfxbgfxcbgf", color: Colors.grey),
     NoteModal(
         title: "hello", description: "fgdfgbdfxbgfxcbgf", color: Colors.amber),
     NoteModal(
@@ -23,8 +23,13 @@ class NotesData with ChangeNotifier {
     return _notes;
   }
 
-  void addNote(NoteModal nodemodal) {
-    _notes.insert(0, nodemodal);
+  void addNote(NoteModal notemodal, int index) {
+    if (index == -1) {
+      _notes.insert(0, notemodal);
+    } else {
+      _notes.removeAt(index);
+      _notes.insert(index, notemodal);
+    }
     notifyListeners();
   }
 }

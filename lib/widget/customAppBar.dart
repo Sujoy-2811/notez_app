@@ -31,7 +31,8 @@ class CustomAppBar extends StatelessWidget {
                 Navigator.of(context).pushNamed(NewNote.route, arguments: {
                   "title": "",
                   "description": "",
-                  "color": Colors.blueGrey
+                  "color": Colors.blueGrey,
+                  "index": -1
                 });
               },
               icon: Icon(Icons.add_box)),
