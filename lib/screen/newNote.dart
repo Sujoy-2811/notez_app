@@ -65,59 +65,54 @@ class _NewNoteState extends State<NewNote> {
         appBar: appBar,
         backgroundColor: Colors.black,
         body: SingleChildScrollView(
-          child: Container(
-            height: (MediaQuery.of(context).size.height -
-                    MediaQuery.of(context).padding.top -
-                    appBar.preferredSize.height) *
-                0.999,
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(color: selectedColor),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      labelText: "Title",
-                      //border: InputBorder.none,
-                    ),
-                    style: TextStyle(
-                      // debugLabel: "Title",
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    controller: title,
+          // scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              Container(
+                // height: 500,
+                decoration: BoxDecoration(color: selectedColor),
+                child: TextField(
+                  decoration: InputDecoration(
+                    labelText: "Title",
+                    //border: InputBorder.none,
                   ),
-                ),
-                Container(
-                  height: 2,
-                  decoration: BoxDecoration(color: Colors.black),
-                ),
-                Container(
-                  decoration: BoxDecoration(color: selectedColor),
-                  child: TextField(
-                    maxLines: 10,
-                    decoration: InputDecoration(
-                      alignLabelWithHint: true,
-                      labelText: "Description",
-                      //border: InputBorder.none,
-                    ),
-                    style: TextStyle(
-                      // debugLabel: "Title",
-                      fontSize: 20,
-                      // fontWeight: FontWeight.w600,
-                    ),
-                    controller: description,
+                  style: TextStyle(
+                    // debugLabel: "Title",
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
                   ),
+                  controller: title,
                 ),
-                Flexible(
-                    fit: FlexFit.tight,
-                    child: Container(
-                      padding: EdgeInsets.all(10),
-                      height: double.infinity,
-                      decoration: BoxDecoration(color: Colors.black),
-                      child: Options(changeColor),
-                    )),
-              ],
-            ),
+              ),
+              Container(
+                height: 2,
+                decoration: BoxDecoration(color: Colors.black),
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.40,
+                decoration: BoxDecoration(color: selectedColor),
+                child: TextField(
+                  maxLines: 15,
+                  decoration: InputDecoration(
+                    alignLabelWithHint: true,
+                    labelText: "Description",
+                    //border: InputBorder.none,
+                  ),
+                  style: TextStyle(
+                    // debugLabel: "Title",
+                    fontSize: 20,
+                    // fontWeight: FontWeight.w600,
+                  ),
+                  controller: description,
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(10),
+                // height: 700,
+                decoration: BoxDecoration(color: Colors.black),
+                child: Options(changeColor),
+              ),
+            ],
           ),
         ));
   }
