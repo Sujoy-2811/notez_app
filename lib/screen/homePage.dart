@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:notez_app/modal/NotesModal.dart';
 import 'package:notez_app/provider/notesData.dart';
 import 'package:notez_app/screen/newNote.dart';
 import 'package:notez_app/widget/customAppBar.dart';
@@ -7,14 +8,14 @@ import 'package:notez_app/widget/customAppBar.dart';
 import 'package:notez_app/widget/note.dart';
 import 'package:provider/provider.dart';
 
-class MyHomePage extends StatelessWidget {
-  // var notes = [
-  //   'sfsefjsliedfjl ljlkj kkljlkjkljk',
-  //   'sfsefjsliedfjl ljlkj kkljlkjkljk  jhgjh kjh hkuhkjhjb jg',
-  //   // 'sfsefjsliedfjl ljlkj kkljlkjkljj kkljlj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjj kkljlkjkljk gjk jgujhkjh khh ',
-  //   // 'sfsefjsliedfjl ljlkj kkljlkjkljk gjgkjhkjhj',
-  //   // 'sfsefjsliedfjl ljlkj kkljlkjkljk gjgkjhkjhj',
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
 
+class _MyHomePageState extends State<MyHomePage> {
+  bool firstTime = true;
+  List<NoteModal> notes = [];
   @override
   Widget build(BuildContext context) {
     // ];
@@ -24,7 +25,19 @@ class MyHomePage extends StatelessWidget {
     final appBarSize = appBar.preferredSize.height;
 
     final productData = Provider.of<NotesData>(context);
-    final notes = productData.getData();
+    if (firstTime) {
+      notes = productData.getData();
+      firstTime = false;
+    }
+
+    void search(String search) {
+      print(search);
+      setState(() {
+        notes = productData.searchData(search);
+      });
+      // print(notes[0].title);
+    }
+
     // print(notes);
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -34,7 +47,7 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              child: CustomAppBar(),
+              child: CustomAppBar(search),
               height: (MediaQuery.of(context).size.height -
                       appBarSize -
                       MediaQuery.of(context).padding.top) *

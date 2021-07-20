@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:notez_app/screen/newNote.dart';
 
 class CustomAppBar extends StatelessWidget {
+  Function searchData;
+
+  CustomAppBar(this.searchData);
   // final appBarSize;
   // CustomAppBar(this.appBarSize)
   @override
@@ -12,6 +15,9 @@ class CustomAppBar extends StatelessWidget {
         children: [
           Expanded(
             child: TextField(
+              onChanged: (val) {
+                searchData(val);
+              },
               decoration: InputDecoration(
                 labelText: "Search",
                 border: InputBorder.none,

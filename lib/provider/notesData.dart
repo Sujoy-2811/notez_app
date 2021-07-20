@@ -17,10 +17,19 @@ class NotesData with ChangeNotifier {
         title: "hello", description: "fgdfgbdfxbgfxcbgf", color: Colors.amber),
     NoteModal(
         title: "Hi", description: "fgdfgbdfxbgfxcbgf", color: Colors.amber),
+    NoteModal(
+        title: "Pie", description: "fgdfgbdfxbgfxcbgf", color: Colors.amber),
   ];
 
   List<NoteModal> getData() {
     return _notes;
+  }
+
+  List<NoteModal> searchData(String search) {
+    return _notes
+        .where((element) =>
+            element.title.toLowerCase().startsWith(search.toLowerCase()))
+        .toList();
   }
 
   void addNote(NoteModal notemodal, int index) {
