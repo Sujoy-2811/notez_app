@@ -15,7 +15,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   bool firstTime = true;
-  List<NoteModal> notes = [];
+  List<NoteModal> notes = [
+    NoteModal.withID(
+        id: 0,
+        title: "hello1",
+        description: "fgdfgbdfxbgfxcbgf",
+        color: Colors.grey),
+  ];
   @override
   Widget build(BuildContext context) {
     // ];
@@ -24,18 +30,26 @@ class _MyHomePageState extends State<MyHomePage> {
     );
     final appBarSize = appBar.preferredSize.height;
 
-    final productData = Provider.of<NotesData>(context);
-    if (firstTime) {
-      notes = productData.getData();
-      firstTime = false;
-    }
-
+    final productData = Provider.of<NotesData>(context, listen: true);
     void search(String search) {
       print(search);
       setState(() {
         notes = productData.searchData(search);
       });
       // print(notes[0].title);
+    }
+
+    if (firstTime) {
+      productData.getData().then((value) {
+        setState(() {
+          notes = value;
+        });
+      }).then((value) {
+        Future.delayed(const Duration(milliseconds: 500), () {
+          search("");
+        });
+      });
+      firstTime = false;
     }
 
     // print(notes);
