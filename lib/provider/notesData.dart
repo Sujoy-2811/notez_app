@@ -20,26 +20,26 @@ class NotesData with ChangeNotifier {
       noteListFuture.then((value) {
         this._notes = value;
         notifyListeners();
-        print("123");
       });
     });
-
     // Future.delayed(const Duration(milliseconds: 500), () {});
 
-    return _notes;
+    return _notes.reversed.toList();
   }
 
   List<NoteModal> searchData(String search) {
     if (search == " ") {
-      return _notes;
+      return _notes.reversed.toList();
     }
     return _notes
         .where((element) =>
             element.title.toLowerCase().startsWith(search.toLowerCase()))
+        .toList()
+        .reversed
         .toList();
   }
 
-  void addNote(NoteModal notemodal, int index) async {
+  Future<void> addNote(NoteModal notemodal, int index) async {
     final Future<Database> dbFuture = _databaseHelper.initializeDatabase();
     if (index == -1) {
       await dbFuture.then((Database) {
@@ -47,14 +47,14 @@ class NotesData with ChangeNotifier {
           notemodal.id = value;
           _databaseHelper.insertNote(notemodal);
           getData();
-          notifyListeners();
+          // notifyListeners();
         });
       });
     } else {
       await dbFuture.then((database) {
         _databaseHelper.updateNote(notemodal);
         getData();
-        notifyListeners();
+        // notifyListeners();
       });
       // _notes.removeAt(index);
       // _notes.insert(index, notemodal);

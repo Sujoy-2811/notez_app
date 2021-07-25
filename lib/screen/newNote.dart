@@ -19,13 +19,17 @@ class _NewNoteState extends State<NewNote> {
   var index = -1;
   Function addNoteData = () {};
 
-  void addNote() {
+  void addNote() async {
+    print("Index $index");
     if (title.text == "" || description.text == "") {
       return;
     }
-    var note = NoteModal(
-        title: title.text, description: description.text, color: selectedColor);
-    addNoteData(note, index);
+    var note = NoteModal.withID(
+        id: index,
+        title: title.text,
+        description: description.text,
+        color: selectedColor);
+    await addNoteData(note, index);
     Navigator.of(context).pop();
   }
 

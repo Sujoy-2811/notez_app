@@ -5,9 +5,8 @@ import 'package:notez_app/screen/newNote.dart';
 class Note extends StatelessWidget {
   // final Color noteColor;
   final NoteModal noteText;
-  final index;
 
-  Note(this.noteText, this.index);
+  Note(this.noteText);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,7 @@ class Note extends StatelessWidget {
               "title": noteText.title,
               "description": noteText.description,
               "color": noteText.color,
-              "index": index
+              "index": noteText.id
             });
           },
           child: ListView(

@@ -16,11 +16,11 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   bool firstTime = true;
   List<NoteModal> notes = [
-    NoteModal.withID(
-        id: 0,
-        title: "hello1",
-        description: "fgdfgbdfxbgfxcbgf",
-        color: Colors.grey),
+    //   NoteModal.withID(
+    //       id: 0,
+    //       title: "hello1",
+    //       description: "fgdfgbdfxbgfxcbgf",
+    //       color: Colors.grey),
   ];
   @override
   Widget build(BuildContext context) {
@@ -44,13 +44,21 @@ class _MyHomePageState extends State<MyHomePage> {
         setState(() {
           notes = value;
         });
-      }).then((value) {
-        Future.delayed(const Duration(milliseconds: 500), () {
-          search("");
-        });
       });
-      firstTime = false;
     }
+
+    // if (firstTime) {
+    //   productData.getData().then((value) {
+    //     setState(() {
+    //       notes = value;
+    //     });
+    //   }).then((value) {
+    //     Future.delayed(const Duration(milliseconds: 500), () {
+    //       search("");
+    //     });
+    //   });
+    //   firstTime = false;
+    // }
 
     // print(notes);
     return Scaffold(
@@ -77,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 crossAxisCount: 2,
                 itemCount: notes.length,
                 itemBuilder: (BuildContext context, int index) =>
-                    Note(notes[index], index),
+                    Note(notes[index]),
                 staggeredTileBuilder: (int index) => new StaggeredTile.fit(1),
                 // new StaggeredTile.count(2, index.isEven ? 2 : 1),
                 mainAxisSpacing: 4.0,
