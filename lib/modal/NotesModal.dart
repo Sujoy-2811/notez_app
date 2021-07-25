@@ -19,13 +19,7 @@ class NoteModal {
       required this.color});
 
   String colorToString(MaterialColor color) {
-    if (color.toString() == Colors.green.toString()) return "green";
-    if (color.toString() == Colors.blueGrey.toString()) return "blueGrey";
-    if (color.toString() == Colors.blue.toString()) return "blue";
-    if (color.toString() == Colors.orange.toString()) return "orange";
-    if (color.toString() == Colors.red.toString()) return "red";
-    if (color.toString() == Colors.pink.toString()) return "pink";
-    return "amber";
+    return color.toString();
   }
 
   MaterialColor stringToColor(String color) {
@@ -45,16 +39,14 @@ class NoteModal {
       "title": title,
       "description": description,
       "color": colorToString(color),
-      //todo
     };
     return map;
   }
 
   NoteModal.fromMap(Map<String, dynamic> map) {
-    print('hi');
     this.id = map['id'];
     this.title = map['title'];
     this.description = map['description'];
-    this.color = Colors.amber;
+    this.color = stringToColor(map['color']);
   }
 }
