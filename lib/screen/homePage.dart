@@ -31,6 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final appBarSize = appBar.preferredSize.height;
 
     final productData = Provider.of<NotesData>(context, listen: true);
+    productData.getData().then((value) => notes = value);
     void search(String search) {
       print(search);
       setState(() {
@@ -40,25 +41,19 @@ class _MyHomePageState extends State<MyHomePage> {
     }
 
     if (firstTime) {
+      // List<NoteModal> list = [];
       productData.getData().then((value) {
         setState(() {
           notes = value;
         });
+      }).then((value) {
+        Future.delayed(const Duration(milliseconds: 500), () {
+          search("");
+        });
       });
-    }
 
-    // if (firstTime) {
-    //   productData.getData().then((value) {
-    //     setState(() {
-    //       notes = value;
-    //     });
-    //   }).then((value) {
-    //     Future.delayed(const Duration(milliseconds: 500), () {
-    //       search("");
-    //     });
-    //   });
-    //   firstTime = false;
-    // }
+      firstTime = false;
+    }
 
     // print(notes);
     return Scaffold(

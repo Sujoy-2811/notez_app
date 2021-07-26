@@ -58,13 +58,12 @@ class NoteDatabaseHelper {
   }
 
   // Insert Operation: Insert a Note object to database
-  Future<void> insertNote(NoteModal note) async {
+  Future<int> insertNote(NoteModal note) async {
     Database db = await this.database;
     print("Before insert");
     print(note.toString());
     var result = await db.insert(noteTable, note.toMap());
-    // return result;
-    // return 5;
+    return result;
   }
 
   // Update Operation: Update a Note object and save it to database
