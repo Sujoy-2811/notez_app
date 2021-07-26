@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class Options extends StatelessWidget {
   // const Options({ Key? key }) : super(key: key);
   final Function changeColor;
+  final Function deleteFun;
 
-  Options(this.changeColor);
+  Options(this.changeColor, this.deleteFun);
 
   @override
   Widget build(BuildContext context) {
@@ -127,19 +128,24 @@ class Options extends StatelessWidget {
             )
           ],
         ),
-        Row(
-          children: [
-            IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.delete,
-                  color: Colors.white,
-                )),
-            Text(
-              "Delete Note",
-              style: TextStyle(color: Colors.white, fontSize: 18),
-            )
-          ],
+        InkWell(
+          onTap: () {
+            deleteFun();
+          },
+          child: Row(
+            children: [
+              IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.delete,
+                    color: Colors.white,
+                  )),
+              Text(
+                "Delete Note",
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              )
+            ],
+          ),
         ),
       ],
     );

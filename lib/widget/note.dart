@@ -5,11 +5,17 @@ import 'package:notez_app/screen/newNote.dart';
 class Note extends StatelessWidget {
   // final Color noteColor;
   final NoteModal noteText;
+  bool first = false;
 
   Note(this.noteText);
 
   @override
   Widget build(BuildContext context) {
+    if (first) {
+      print("Note values");
+      print(noteText.toString());
+      first = false;
+    }
     return ConstrainedBox(
         constraints: BoxConstraints(
           minHeight: 90.0,

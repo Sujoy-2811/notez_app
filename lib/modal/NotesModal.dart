@@ -1,11 +1,9 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 // import 'package:flutter/foundation.dart';
 
 class NoteModal {
-  int id = 0;
+  int? id;
   String title = "";
   String description = "";
   MaterialColor color = Colors.blueGrey;
@@ -35,11 +33,13 @@ class NoteModal {
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>();
     map = {
-      "id": id,
       "title": title,
       "description": description,
       "color": colorToString(color),
     };
+    if (id != null) {
+      map['id'] = id;
+    }
     return map;
   }
 
@@ -48,5 +48,9 @@ class NoteModal {
     this.title = map['title'];
     this.description = map['description'];
     this.color = stringToColor(map['color']);
+  }
+
+  String toString() {
+    return "title : $title , des : $description , id : $id , color : $color";
   }
 }

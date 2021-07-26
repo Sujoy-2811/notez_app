@@ -42,16 +42,16 @@ class NotesData with ChangeNotifier {
   Future<void> addNote(NoteModal notemodal, int index) async {
     final Future<Database> dbFuture = _databaseHelper.initializeDatabase();
     if (index == -1) {
-      await dbFuture.then((Database) {
+      await dbFuture.then((_) {
         _databaseHelper.getCount().then((value) {
-          notemodal.id = value;
+          notemodal.id = null;
           _databaseHelper.insertNote(notemodal);
           getData();
           // notifyListeners();
         });
       });
     } else {
-      await dbFuture.then((database) {
+      await dbFuture.then((_) {
         _databaseHelper.updateNote(notemodal);
         getData();
         // notifyListeners();
@@ -63,5 +63,14 @@ class NotesData with ChangeNotifier {
     print("Hello\n");
     print(_notes.length);
     print("Hello\n");
+  }
+
+  void deleteNote(BuildContext context, int id) async {
+    // final Future<Database> dbFuture =
+    _databaseHelper.initializeDatabase();
+    await _databaseHelper.deleteNote(id);
+    await getData();
+    notifyListeners();
+    Navigator.of(context).pop();
   }
 }

@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:notez_app/modal/NotesModal.dart';
-import 'package:notez_app/widget/note.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -59,10 +58,13 @@ class NoteDatabaseHelper {
   }
 
   // Insert Operation: Insert a Note object to database
-  Future<int> insertNote(NoteModal note) async {
+  Future<void> insertNote(NoteModal note) async {
     Database db = await this.database;
+    print("Before insert");
+    print(note.toString());
     var result = await db.insert(noteTable, note.toMap());
-    return result;
+    // return result;
+    // return 5;
   }
 
   // Update Operation: Update a Note object and save it to database

@@ -18,20 +18,7 @@ class _NewNoteState extends State<NewNote> {
   var description = TextEditingController();
   var index = -1;
   Function addNoteData = () {};
-
-  void addNote() async {
-    print("Index $index");
-    if (title.text == "" || description.text == "") {
-      return;
-    }
-    var note = NoteModal.withID(
-        id: index,
-        title: title.text,
-        description: description.text,
-        color: selectedColor);
-    await addNoteData(note, index);
-    Navigator.of(context).pop();
-  }
+  Function deleteNoteData = () {};
 
   // NotesData final productData ;
 
@@ -59,7 +46,33 @@ class _NewNoteState extends State<NewNote> {
     }
     // }
     final productData = Provider.of<NotesData>(context, listen: false);
+
+    //delete function
+    deleteNoteData = () {
+      if (index == -1) {
+        print("index $index");
+        Navigator.of(context).pop();
+      } else {
+        productData.deleteNote(context, index);
+      }
+    };
+
     addNoteData = productData.addNote;
+
+    void addNote() async {
+      print("Index $index");
+      if (title.text == "" || description.text == "") {
+        return;
+      }
+      var note = NoteModal.withID(
+          id: index,
+          title: title.text,
+          description: description.text,
+          color: selectedColor);
+      await addNoteData(note, index);
+      Navigator.of(context).pop();
+    }
+
     final appBar = AppBar(
       title: Text("Add Note"),
       actions: [IconButton(onPressed: addNote, icon: Icon(Icons.save))],
@@ -114,7 +127,7 @@ class _NewNoteState extends State<NewNote> {
                 padding: EdgeInsets.all(10),
                 // height: 700,
                 decoration: BoxDecoration(color: Colors.black),
-                child: Options(changeColor),
+                child: Options(changeColor, deleteNoteData),
               ),
             ],
           ),
